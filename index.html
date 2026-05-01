@@ -521,229 +521,73 @@
 
 <script>
 /* ════════════════════════════
-   DATA
+   STATE & DATA
 ════════════════════════════ */
-const BRANDS = [
-  {
-    id: 'skyy',
-    name: 'Skyy',
-    logoW: 'assets/skyy_logo_white.png',
-    hero: 'assets/website_sky_product_promo.png',
-    tagline: 'Dual Tanks. Skyy Smooth. Flavor Fusion On Demand.',
-    desc: 'Experience the perfect blend of craft cannabis and innovation with Skyy, elevating your vibe to new heights. Our dual-tank pod device delivers unmatched flavor fusion for the discerning enthusiast.',
-    color: '#00d4ff',
-    bgA: '#001520', bgB: '#003050',
-    products: [
-      {
-        id:'skyy-1', name:'Dual Tank Pod Device', sub:'By Realeaf Botanicals',
-        desc:'The Skyy Dual Tank Pod Device is engineered for the ultimate flavor fusion experience. Switch between two strains on demand with our patented dual-tank technology. Sleek, pocket-sized, and built for the modern cannabis enthusiast.',
-        tags:['Device','Dual-Tank','Vape','Rechargeable'],
-        details:{ Type:'Vape Device', Capacity:'2 × 0.5g', Battery:'350mAh', Charge:'USB-C' },
-        grad:'linear-gradient(135deg,#001520 0%,#003a5c 60%,#001520 100%)', image: 'https://loremflickr.com/400/300/vape?random=1'
-      },
-      {
-        id:'skyy-2', name:'Skyy Pod — Blue Dream + Wedding Cake', sub:'Hybrid Blend · 1g Total',
-        desc:'A harmonious blend of Blue Dream\'s energizing clarity and Wedding Cake\'s relaxing euphoria. Two perfectly matched strains in one pod, ready to switch on your command.',
-        tags:['Pod','Hybrid','1g','Vape'],
-        details:{ Type:'Pod Cartridge', Weight:'1g', THC:'82%', Blend:'Hybrid' },
-        grad:'linear-gradient(135deg,#001833 0%,#004488 60%,#001833 100%)', image: 'https://loremflickr.com/400/300/vape?random=2'
-      },
-      {
-        id:'skyy-3', name:'Skyy Pod — Strawberry Cough + Lemon Haze', sub:'Sativa Blend · 1g Total',
-        desc:'Wake up your senses with the bright, fruity fusion of Strawberry Cough and Lemon Haze. This sativa-forward blend delivers uplifting energy and crisp citrus notes that keep you going.',
-        tags:['Pod','Sativa','1g','Vape'],
-        details:{ Type:'Pod Cartridge', Weight:'1g', THC:'79%', Blend:'Sativa' },
-        grad:'linear-gradient(135deg,#0d0025 0%,#2a0070 60%,#0d0025 100%)', image: 'https://loremflickr.com/400/300/vape?random=3'
-      },
-      {
-        id:'skyy-4', name:'Skyy Pod — Sunset Sherbet + Gelato', sub:'Indica Blend · 1g Total',
-        desc:'Unwind with the creamy, dessert-inspired fusion of Sunset Sherbet and Gelato. A luxurious indica blend that melts away the day and delivers waves of relaxed euphoria.',
-        tags:['Pod','Indica','1g','Vape'],
-        details:{ Type:'Pod Cartridge', Weight:'1g', THC:'85%', Blend:'Indica' },
-        grad:'linear-gradient(135deg,#001028 0%,#003066 60%,#001028 100%)', image: 'https://loremflickr.com/400/300/vape?random=4'
-      },
-      {
-        id:'skyy-5', name:'Skyy Starter Kit', sub:'Device + Pod Bundle',
-        desc:'Everything you need to experience Skyy. Includes the Dual Tank Pod Device, one pod of your choice, and a USB-C charging cable. The perfect entry point into the Skyy experience.',
-        tags:['Bundle','Starter','Device','Pod'],
-        details:{ Type:'Bundle', Includes:'Device + Pod + Cable', Battery:'350mAh', Charge:'USB-C' },
-        grad:'linear-gradient(135deg,#001018 0%,#002845 60%,#001018 100%)', image: 'https://loremflickr.com/400/300/vape?random=5'
-      }
-    ]
-  },
-  {
-    id: 'fyre',
-    name: 'Fyre',
-    logoW: 'assets/fyre_logo_white.png',
-    hero: 'assets/website_fyre_product_promo.png',
-    tagline: 'Pocket-Sized. Party-Ready. Fuel The Fyre.',
-    desc: 'Enjoy Fyre Pre-Rolled Cannabis for a smooth, fire experience that ignites your senses and sets the vibe ablaze. Crafted in small batches for maximum potency and consistent burn.',
-    color: '#ff8c00',
-    bgA: '#1a0500', bgB: '#4a1400',
-    products: [
-      {
-        id:'fyre-1', name:'Fyre Minis — Original Blend', sub:'8-Pack Pre-Rolls · 0.5g Each',
-        desc:'The classic Fyre experience. Eight perfectly rolled mini pre-rolls packed with our signature blend. Smooth draw, consistent burn, and the signature Fyre kick every time.',
-        tags:['Pre-Roll','Minis','8-Pack','Hybrid'],
-        details:{ Type:'Pre-Roll', Count:'8 Pack', Weight:'0.5g each', Blend:'Hybrid' },
-        grad:'linear-gradient(135deg,#1a0500 0%,#4a1500 60%,#1a0500 100%)', image: 'https://loremflickr.com/400/300/smoke?random=6'
-      },
-      {
-        id:'fyre-2', name:'Fyre Minis — Sativa Blend', sub:'8-Pack Pre-Rolls · 0.5g Each',
-        desc:'Light up and level up. Our sativa-dominant mini pre-rolls deliver energizing, cerebral effects perfect for social situations and creative endeavors. Pure fire, every puff.',
-        tags:['Pre-Roll','Minis','8-Pack','Sativa'],
-        details:{ Type:'Pre-Roll', Count:'8 Pack', Weight:'0.5g each', Blend:'Sativa' },
-        grad:'linear-gradient(135deg,#100a00 0%,#302000 60%,#100a00 100%)', image: 'https://loremflickr.com/400/300/smoke?random=7'
-      },
-      {
-        id:'fyre-3', name:'Fyre Minis — Indica Blend', sub:'8-Pack Pre-Rolls · 0.5g Each',
-        desc:'Wind down with our indica-dominant mini pre-rolls. Deeply relaxing, full-bodied effects that calm the mind and soothe the body. The perfect end to any day.',
-        tags:['Pre-Roll','Minis','8-Pack','Indica'],
-        details:{ Type:'Pre-Roll', Count:'8 Pack', Weight:'0.5g each', Blend:'Indica' },
-        grad:'linear-gradient(135deg,#180600 0%,#401000 60%,#180600 100%)', image: 'https://loremflickr.com/400/300/smoke?random=8'
-      },
-      {
-        id:'fyre-4', name:'Fyre King Size Pre-Roll', sub:'Single · 1.5g Premium',
-        desc:'When minis aren\'t enough, go king size. Our flagship 1.5g pre-roll is hand-rolled with premium craft flower for a luxurious, extended smoking experience from start to finish.',
-        tags:['Pre-Roll','King-Size','Single','Premium'],
-        details:{ Type:'Pre-Roll', Size:'King Size', Weight:'1.5g', Rolling:'Hand-Rolled' },
-        grad:'linear-gradient(135deg,#200800 0%,#552000 60%,#200800 100%)', image: 'https://loremflickr.com/400/300/smoke?random=9'
-      },
-      {
-        id:'fyre-5', name:'Fyre Infused Minis', sub:'4-Pack Pre-Rolls · Kief-Coated',
-        desc:'Elevated beyond the ordinary. Our infused mini pre-rolls are coated in premium kief for enhanced potency and a slow, silky burn. For those who demand more from every session.',
-        tags:['Pre-Roll','Infused','Kief','4-Pack'],
-        details:{ Type:'Infused Pre-Roll', Count:'4 Pack', Weight:'0.75g each', Coating:'Premium Kief' },
-        grad:'linear-gradient(135deg,#250000 0%,#600808 60%,#250000 100%)', image: 'https://loremflickr.com/400/300/smoke?random=10'
-      }
-    ]
-  },
-  {
-    id: 'rayne',
-    name: 'Rayne',
-    logoW: 'assets/rayne_logo_white.png',
-    hero: 'assets/website_rayne_product_promo.png',
-    tagline: 'Rain Or Shine. These Drops Hit Every Time.',
-    desc: 'Unwind with Rayne Drops — our infused gummies with juicy fruit flavors that provide a perfectly mellow experience. Each drop is precisely dosed for consistent, delightful effects you can count on.',
-    color: '#a064f8',
-    bgA: '#0a0018', bgB: '#28005a',
-    products: [
-      {
-        id:'rayne-1', name:'Sour Power Drops — Variety Pack', sub:'10-Pack Gummies · 10mg THC Each',
-        desc:'The ultimate variety experience. Our Sour Power Drops Variety Pack features an assortment of tangy, fruit-forward gummies that hit exactly where you want them, every single time. 100mg total.',
-        tags:['Edible','Gummy','10mg','10-Pack','Variety'],
-        details:{ Type:'Infused Gummy', Count:'10 Pack', Dose:'10mg THC each', Total:'100mg THC' },
-        grad:'linear-gradient(135deg,#0a0018 0%,#28006a 60%,#0a0018 100%)', image: 'https://loremflickr.com/400/300/candy?random=11'
-      },
-      {
-        id:'rayne-2', name:'Rayne Drops — Strawberry', sub:'10-Pack Gummies · 10mg THC Each',
-        desc:'Sweet, ripe strawberry flavor infused with precisely 10mg of THC per drop. Juicy, consistent, and absolutely delicious. Rain or shine, Rayne Drops in Strawberry hit right.',
-        tags:['Edible','Gummy','10mg','10-Pack','Strawberry'],
-        details:{ Type:'Infused Gummy', Count:'10 Pack', Dose:'10mg THC each', Flavor:'Strawberry' },
-        grad:'linear-gradient(135deg,#200018 0%,#500040 60%,#200018 100%)', image: 'https://loremflickr.com/400/300/candy?random=12'
-      },
-      {
-        id:'rayne-3', name:'Rayne Drops — Watermelon', sub:'10-Pack Gummies · 10mg THC Each',
-        desc:'Crisp, refreshing watermelon bursting with flavor in every chew. Our Watermelon Rayne Drops deliver the same precise dosing and reliable effects in a summery, beloved flavor.',
-        tags:['Edible','Gummy','10mg','10-Pack','Watermelon'],
-        details:{ Type:'Infused Gummy', Count:'10 Pack', Dose:'10mg THC each', Flavor:'Watermelon' },
-        grad:'linear-gradient(135deg,#001a10 0%,#004020 60%,#001a10 100%)', image: 'https://loremflickr.com/400/300/candy?random=13'
-      },
-      {
-        id:'rayne-4', name:'Rayne Drops — Blue Raspberry', sub:'10-Pack Gummies · 10mg THC Each',
-        desc:'Bold, tangy blue raspberry with a satisfying sour kick. These drops pack the perfect punch of flavor and 10mg THC per drop — for those who like their Rayne with a little zing.',
-        tags:['Edible','Gummy','10mg','10-Pack','Blue Raspberry'],
-        details:{ Type:'Infused Gummy', Count:'10 Pack', Dose:'10mg THC each', Flavor:'Blue Raspberry' },
-        grad:'linear-gradient(135deg,#000a28 0%,#001668 60%,#000a28 100%)', image: 'https://loremflickr.com/400/300/candy?random=14'
-      },
-      {
-        id:'rayne-5', name:'Rayne 2:1 CBD:THC Drops', sub:'10-Pack Gummies · Balanced Blend',
-        desc:'A perfectly balanced blend for those seeking a milder, wellness-focused experience. Our 2:1 CBD:THC drops offer gentle relief and relaxation without overwhelming psychoactive effects.',
-        tags:['Edible','Gummy','CBD','5mg THC','Wellness'],
-        details:{ Type:'Infused Gummy', Count:'10 Pack', THC:'5mg each', CBD:'10mg each' },
-        grad:'linear-gradient(135deg,#051520 0%,#103040 60%,#051520 100%)', image: 'https://loremflickr.com/400/300/candy?random=15'
-      }
-    ]
-  },
-  {
-    id: 'foryst',
-    name: 'Foryst',
-    logoW: 'assets/foryst_logo_white.png',
-    hero: 'assets/website_foryst_product_promo.png',
-    tagline: 'Craft Cannabis. Small Batch. Exceptional Quality.',
-    desc: 'Foryst delivers premium craft cannabis flower in small, carefully curated batches. Each strain is hand-selected for its unique terpene profile, potency, and overall smoking experience.',
-    color: '#e85d1e',
-    bgA: '#150500', bgB: '#3c1200',
-    products: [
-      {
-        id:'foryst-1', name:'Cara Cara', sub:'Indica · 3.5g Craft Flower',
-        desc:'A deeply relaxing indica with sweet citrus notes and hints of berry. Cara Cara\'s dense, resinous buds deliver a powerful body effect paired with a pleasantly euphoric mental state. A true craft classic.',
-        tags:['Flower','Indica','3.5g','Craft','Relaxing'],
-        details:{ Type:'Flower', Weight:'3.5g', Blend:'Indica', THC:'24–27%' },
-        grad:'linear-gradient(135deg,#1a0500 0%,#4a1200 60%,#1a0500 100%)', image: 'https://loremflickr.com/400/300/leaf?random=16'
-      },
-      {
-        id:'foryst-2', name:'Hella Jelly', sub:'Hybrid · 3.5g Craft Flower',
-        desc:'Sweet, fruity, and undeniably dank. Hella Jelly is a balanced hybrid with a complex terpene profile featuring notes of grape, berry, and tropical fruit. Smooth smoke, well-rounded effects.',
-        tags:['Flower','Hybrid','3.5g','Craft','Fruity'],
-        details:{ Type:'Flower', Weight:'3.5g', Blend:'Hybrid', THC:'26–29%' },
-        grad:'linear-gradient(135deg,#150a20 0%,#381a44 60%,#150a20 100%)', image: 'https://loremflickr.com/400/300/leaf?random=17'
-      },
-      {
-        id:'foryst-3', name:'Jelly Donutz', sub:'Indica · 3.5g Craft Flower',
-        desc:'Sweet, doughy, and delightfully relaxing. Jelly Donutz lives up to its name with dessert-forward terpenes and a deeply calming indica experience. Perfect for evening sessions.',
-        tags:['Flower','Indica','3.5g','Craft','Sweet'],
-        details:{ Type:'Flower', Weight:'3.5g', Blend:'Indica', THC:'25–28%' },
-        grad:'linear-gradient(135deg,#1a0010 0%,#420025 60%,#1a0010 100%)', image: 'https://loremflickr.com/400/300/leaf?random=18'
-      },
-      {
-        id:'foryst-4', name:'Jungle Sunset', sub:'Sativa · 3.5g Craft Flower',
-        desc:'A vibrant, energizing sativa bursting with tropical and citrus terpenes. Jungle Sunset delivers an uplifting, creative high perfect for daytime adventures and outdoor activities.',
-        tags:['Flower','Sativa','3.5g','Craft','Energizing'],
-        details:{ Type:'Flower', Weight:'3.5g', Blend:'Sativa', THC:'22–25%' },
-        grad:'linear-gradient(135deg,#1a0800 0%,#602000 60%,#1a0800 100%)', image: 'https://loremflickr.com/400/300/leaf?random=19'
-      },
-      {
-        id:'foryst-5', name:'Humboldt Dreams', sub:'Hybrid · 3.5g Craft Flower',
-        desc:'Inspired by California\'s legendary growing region, Humboldt Dreams is a premium hybrid with earthy pine, lemon, and spice notes. A well-balanced, long-lasting experience that soothes without sedating.',
-        tags:['Flower','Hybrid','3.5g','Craft','Premium'],
-        details:{ Type:'Flower', Weight:'3.5g', Blend:'Hybrid', THC:'23–26%' },
-        grad:'linear-gradient(135deg,#081200 0%,#182e00 60%,#081200 100%)', image: 'https://loremflickr.com/400/300/leaf?random=20'
-      },
-      {
-        id:'foryst-6', name:'Boo Berry Cookies', sub:'Indica · 3.5g Craft Flower',
-        desc:'A hauntingly good indica cross with notes of blueberry, vanilla, and earthy sweetness. Boo Berry Cookies delivers a creeping body high and dreamy, relaxed mental state. A fan favorite.',
-        tags:['Flower','Indica','3.5g','Craft','Berry'],
-        details:{ Type:'Flower', Weight:'3.5g', Blend:'Indica', THC:'27–30%' },
-        grad:'linear-gradient(135deg,#060012 0%,#180035 60%,#060012 100%)', image: 'https://loremflickr.com/400/300/leaf?random=21'
-      }
-    ]
-  }
-];
-
-/* ════════════════════════════
-   STATE
-════════════════════════════ */
+let APP_CONFIG = {};
+let BRANDS = [];
 let activeBrand = null;
 let activeFilter = 'All';
 
 /* ════════════════════════════
    INIT
 ════════════════════════════ */
-document.addEventListener('DOMContentLoaded', renderBrands);
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res = await fetch('data.json');
+    const data = await res.json();
+    APP_CONFIG = data.app || {};
+    BRANDS = data.brands || [];
+
+    applyAppConfig();
+    renderBrands();
+  } catch (err) {
+    console.error('Failed to load data.json', err);
+  }
+});
+
+function applyAppConfig() {
+  if (APP_CONFIG.title) document.title = APP_CONFIG.title;
+
+  const hdrLogo = document.querySelector('.hdr-logo');
+  if (hdrLogo) {
+    if (APP_CONFIG.headerLogo) hdrLogo.src = APP_CONFIG.headerLogo;
+    if (APP_CONFIG.headerAlt) hdrLogo.alt = APP_CONFIG.headerAlt;
+  }
+
+  const backBtn = document.getElementById('backBtn');
+  if (backBtn && APP_CONFIG.backButtonText) {
+    const svg = backBtn.querySelector('svg');
+    backBtn.innerHTML = '';
+    if (svg) backBtn.appendChild(svg);
+    backBtn.appendChild(document.createTextNode(' ' + APP_CONFIG.backButtonText));
+  }
+
+  const eyebrow = document.querySelector('.brands-hero-eyebrow');
+  if (eyebrow && APP_CONFIG.heroEyebrow) eyebrow.textContent = APP_CONFIG.heroEyebrow;
+
+  const h1 = document.querySelector('.brands-hero h1');
+  if (h1 && APP_CONFIG.heroTitle) h1.textContent = APP_CONFIG.heroTitle;
+
+  const heroDesc = document.querySelector('.brands-hero p');
+  if (heroDesc && APP_CONFIG.heroDesc) heroDesc.textContent = APP_CONFIG.heroDesc;
+
+  const productsTitle = document.querySelector('.products-title');
+  if (productsTitle && APP_CONFIG.productsTitle) productsTitle.textContent = APP_CONFIG.productsTitle;
+}
 
 /* ════════════════════════════
    BRANDS SCREEN
 ════════════════════════════ */
 function renderBrands() {
   const grid = document.getElementById('brandsGrid');
+  const exploreText = APP_CONFIG.exploreText || 'Explore';
   grid.innerHTML = BRANDS.map(b => `
     <div class="brand-card" data-brand="${b.id}" onclick="openBrand('${b.id}')">
       <div class="brand-card-bg" style="background-image:url('${b.hero}')"></div>
       <div class="brand-card-overlay">
         <img src="${b.logoW}" alt="${b.name}" class="brand-card-logo">
         <p class="brand-card-tagline">${b.tagline}</p>
-        <div class="brand-card-btn">Explore ${b.name} <span style="opacity:.7">›</span></div>
+        <div class="brand-card-btn">${exploreText} ${b.name} <span style="opacity:.7">›</span></div>
       </div>
     </div>
   `).join('');
@@ -756,7 +600,7 @@ function openBrand(id) {
   const b = BRANDS.find(x => x.id === id);
   if (!b) return;
   activeBrand = b;
-  activeFilter = 'All';
+  activeFilter = APP_CONFIG.allTagsText || 'All';
 
   document.getElementById('detailHeroBg').style.backgroundImage = `url('${b.hero}')`;
   document.getElementById('detailLogo').src = b.logoW;
@@ -787,12 +631,13 @@ function showBrands() {
    FILTERS
 ════════════════════════════ */
 function buildFilters(b) {
-  const allTags = ['All', ...new Set(b.products.flatMap(p => p.tags))];
+  const allText = APP_CONFIG.allTagsText || 'All';
+  const allTags = [allText, ...new Set(b.products.flatMap(p => p.tags))];
   const wrap = document.getElementById('filterWrap');
   wrap.innerHTML = allTags.map(t => `
-    <button class="filter-chip ${t === 'All' ? 'on' : ''}"
+    <button class="filter-chip ${t === allText ? 'on' : ''}"
             data-tag="${t}"
-            style="${t === 'All' ? chipStyle(b.color) : ''}"
+            style="${t === allText ? chipStyle(b.color) : ''}"
             onclick="applyFilter('${t}',this)">
       ${t}
     </button>
@@ -806,6 +651,7 @@ function chipStyle(color) {
 function applyFilter(tag, btn) {
   activeFilter = tag;
   const color = activeBrand.color;
+  const allText = APP_CONFIG.allTagsText || 'All';
 
   document.querySelectorAll('.filter-chip').forEach(c => {
     c.classList.remove('on');
@@ -817,7 +663,7 @@ function applyFilter(tag, btn) {
   let shown = 0;
   document.querySelectorAll('.prod-card').forEach(card => {
     const tags = card.dataset.tags.split(',');
-    if (tag === 'All' || tags.includes(tag)) {
+    if (tag === allText || tags.includes(tag)) {
       card.classList.remove('hidden');
       shown++;
     } else {
@@ -825,7 +671,9 @@ function applyFilter(tag, btn) {
     }
   });
 
-  document.getElementById('productsCount').textContent = `${shown} item${shown !== 1 ? 's' : ''}`;
+  const iT = APP_CONFIG.itemText || 'item';
+  const isT = APP_CONFIG.itemsText || 'items';
+  document.getElementById('productsCount').textContent = `${shown} ${shown === 1 ? iT : isT}`;
 }
 
 /* ════════════════════════════
@@ -851,8 +699,10 @@ function renderProducts(products) {
     </div>
   `).join('');
 
+  const iT = APP_CONFIG.itemText || 'item';
+  const isT = APP_CONFIG.itemsText || 'items';
   document.getElementById('productsCount').textContent =
-    `${products.length} item${products.length !== 1 ? 's' : ''}`;
+    `${products.length} ${products.length === 1 ? iT : isT}`;
 }
 
 /* ════════════════════════════
